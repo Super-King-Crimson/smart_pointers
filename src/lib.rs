@@ -28,3 +28,9 @@ pub mod topic {
 ");
     }
 }
+
+pub mod r#box;
+
+pub mod deref;
+
+pub mod r#drop;
