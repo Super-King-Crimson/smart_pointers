@@ -11,9 +11,10 @@ pub fn explain() {
     //Also &String can be coerced into a &str because String deref returns a &str
     //Oh yeah also this
     let val = &&*&&****&&&&*&**&&*&String::from("Bro Why Does This Work");
-    this_is_cool(val); //rust automatically derefs my &&&String into a &str
+    this_is_cool(val); //rust automatically derefs my &&&String into a &str (whaddya mean you can't tell it's a &&&String?)
     //if rust didn't do this then uhh
-    this_is_cool(&(***val)[..]);
+    //dereference it into a String, slice it to get a str, then borrow it to form a &str
+    this_is_cool(&(***val)[val.len() - 4..]);
     //what in GOD's name
 
     //ok finally fr

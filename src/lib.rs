@@ -1,3 +1,4 @@
+#![allow(unused)]
 pub mod topic {
     pub fn introduce() {
         println!(
@@ -34,3 +35,5 @@ pub mod r#box;
 pub mod deref;
 
 pub mod r#drop;
+
+pub mod reference_counter;

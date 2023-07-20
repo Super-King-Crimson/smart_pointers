@@ -32,8 +32,7 @@ fn elaborate() {
     //Instead of blowing up your computer, we can insert some indirection:
         //store the value indirectly in a pointer: a pointer always has a known size
     //Now the items will be next to each other, pointing to their next item, instead of inside each other
-
-    #[allow(unused)]
+    
     let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Cons(4, Box::new(Nil))))))));
     //Yay!
     super::return_to_main();
