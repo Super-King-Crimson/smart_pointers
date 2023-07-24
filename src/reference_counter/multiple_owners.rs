@@ -8,7 +8,7 @@ use ConsList::*;
 
 pub fn explain() {
     let a = Cons(5, Rc::new(Cons(10, Rc::new(Nil))));
-    let a_rc = Rc::new(a); //reference count (rc) = 1
+    let a_rc = Rc::new(a); //reference count (rc) = 1 
 
     //Instead of taking ownership, clone the Rc<ConsList> that holds a
     //Calling clone increments rc
@@ -35,7 +35,7 @@ pub fn explain() {
     //Wait, strong count? Apparently that's a thing, we'll learn about it soon
 
     //Note that you can only share immutable references through Rc's, 
-    //otherwise you may break Rust's Pointer Safety Principle (aliased and mutable)
+    //otherwise you may break Rust's Pointer Safety Principle (all of these are aliased)
 
     //To mutate data, use interior mutability pattern and RefCell<T> with Rc<T>
 } //We can't display it, but here a_ref's rc drops to 0, and it's fully dropped

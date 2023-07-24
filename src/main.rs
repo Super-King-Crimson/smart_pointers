@@ -6,4 +6,5 @@ fn main() {
     deref::explain();
     r#drop::explain();
     reference_counter::explain();
+    refcell::explain();
 }

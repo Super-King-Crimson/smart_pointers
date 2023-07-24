@@ -14,14 +14,15 @@ pub fn explain() {
     //Perfect for situations where you don't know when a value will be dropped @compile-time
     //Only can be used in single-threaded environments
 
-    //Alright let's make two lists that refer to a;
+    //Alright let's make two lists that refer to a-
     let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
     let b = Cons(3, Box::new(a));
     // let c = Cons(4, Box::new(a));
-    //This doesn't work: Rust expects each value to have ONE owner
+    //This doesn't work: Rust expects each value to have ONE owner (Cons own their data)
+
     //We COULD add reference params to Cons
         //each item in the list lives as long as the entire list
-    //but that's not always what we'll want
+    //but that's not always what we'll want (that means we can't remove anything)
 
     //Instead, let's make a new Cons list that instead uses Rc<T>
         //We'd replace but that'd kinda break the box example so...
