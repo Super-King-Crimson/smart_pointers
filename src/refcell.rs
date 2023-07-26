@@ -2,6 +2,7 @@ pub mod rules;
 pub mod use_case;
 pub mod logging_borrows;
 pub mod multiple_mutable;
+pub mod memory_leaks;
 
 pub fn explain() {
     println!("Interior mutability is a design pattern that allows you \
@@ -14,4 +15,5 @@ pub fn explain() {
     use_case::explain();
     logging_borrows::explain();
     multiple_mutable::explain();
+    memory_leaks::explain();
 }

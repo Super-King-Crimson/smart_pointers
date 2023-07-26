@@ -4,7 +4,7 @@ pub fn explain() {
     println!("Instead of & and &mut, \
     RefCells use borrow() and borrow_mut()");
 
-    //borrow returns a Ref<T>, borrow_mut returns a RefMut<T>, both implement Deref
+    //borrow returns a Ref<T>, borrow_mut returns a RefMut<T>, both implement Deref(Mut)
     //only reason these exist is so rust can borrow check during run-time
     
     //A RefCell keeps track of how many Ref and RefMut's are currently alive

@@ -12,7 +12,7 @@ pub fn explain() {
 }
 
 #[derive(Debug)] 
-enum ConsList {
+pub enum ConsList {
     //Rc so its countable, RefCell so it's mutable
     Cons(Rc<RefCell<i32>>, Rc<ConsList>),
     Nil,
@@ -31,8 +31,9 @@ fn elaborate() {
     let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a_rc));
     let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a_rc));
 
-    //Calling borrow_mut auto derefs Rc, call another to deref RefCell
-    *value.borrow_mut() += 10;
+    //Calling the fn auto derefs Rc, call another to deref RefCell
+    //explicit derefs here: rust auto derefs the Rc so you don't need the parentheses or asterisk
+    *(*value).borrow_mut() += 10;
 
     println!("a after = {:?}", a_rc);
     println!("b after = {:?}", b);

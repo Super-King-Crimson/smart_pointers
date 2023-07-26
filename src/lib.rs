@@ -39,3 +39,5 @@ pub mod r#drop;
 pub mod reference_counter;
 
 pub mod refcell;
+
+pub mod tree;

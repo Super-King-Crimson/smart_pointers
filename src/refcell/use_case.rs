@@ -92,7 +92,7 @@ mod tests {
             // self.sent_messages.push(msg.to_string());
 
             //...don't try changing the trait definition too,
-            //that restricts your use requirements
+            //that restricts your client's use requirements
 
             //To fix this, we can use a RefCell with interior mutability
             //we can borrow it mutably and push a string onto it, 
@@ -113,6 +113,6 @@ mod tests {
 
         // assert!(mock_messenger.sent_messages.[0].contains("halfway"));
         assert!(mock_messenger.sent_messages.borrow()[0].contains("halfway"));
-        //ok it works nok
+        //ok it works no
     }
 }
