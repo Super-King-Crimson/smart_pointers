@@ -31,9 +31,9 @@ fn elaborate() {
     let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a_rc));
     let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a_rc));
 
-    //Calling the fn auto derefs Rc, call another to deref RefCell
+    //Calling the fn auto derefs Rc and RefCell, then deref to add to it
     //explicit derefs here: rust auto derefs the Rc so you don't need the parentheses or asterisk
-    *(*value).borrow_mut() += 10;
+    *value.borrow_mut() += 10;
 
     println!("a after = {:?}", a_rc);
     println!("b after = {:?}", b);

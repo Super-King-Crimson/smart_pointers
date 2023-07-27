@@ -9,7 +9,7 @@ pub fn explain() {
     
     //Sometimes we WANT to mutate immutable stuff tho
     //like if we wanted something to mutate itself in its methods
-    //but otherwise be mutable (like readonly in a TS class)
+    //but otherwise be immutable (like readonly in a TS class)
 
     //Let's walk through one of those examples now
 }
@@ -63,8 +63,7 @@ impl <'a, T: Messenger> LimitTracker<'a, T> {
 }
 
 //How about we make an object that impl's Messenger
-//and make its method just... keep track of what it's told to send?
-
+//and make its method just keep track of what it's told to send
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -113,6 +112,6 @@ mod tests {
 
         // assert!(mock_messenger.sent_messages.[0].contains("halfway"));
         assert!(mock_messenger.sent_messages.borrow()[0].contains("halfway"));
-        //ok it works no
+        //ok it works now
     }
 }
