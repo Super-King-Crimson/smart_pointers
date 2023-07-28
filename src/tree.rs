@@ -1,5 +1,6 @@
 use std::cell::{RefCell, RefMut, Ref};
 use std::rc::{Rc, Weak};
+use std::ptr;
 
 //with generics!
 #[derive(Debug)]
@@ -43,7 +44,29 @@ impl Node {
         self.0.borrow_mut()
     }
 
+    pub fn is_descendant_of(&self, other: &Node) -> bool {
+        match self.get_parent() {
+            Some(node) => {
+                if ptr::eq(node.0.as_ptr(), other.0.as_ptr()) {
+                    return true;
+                } else {
+                    return node.is_descendant_of(other);
+                }
+            }
+
+            None => false
+        }
+    }
+
     pub fn set_parent(&self, other: &Node) {
+        if ptr::eq(self.0.as_ptr(), other.0.as_ptr()) {
+            panic!("attempt to set a node as its own parent");
+        }
+
+        if other.is_descendant_of(&self) {
+            panic!("setting self's parent to other would result in a circular reference (other is a descendant of self)");
+        }
+
         if let Some(props) = self.get_properties().parent.0.upgrade() {
             props.borrow_mut().children.pop();
         }
@@ -112,6 +135,30 @@ mod tests {
         assert_eq!(100, branch.get_properties().value);
     }
 
+    #[test]
+    #[should_panic(expected = "circular reference")]
+    fn tree_parents_cannot_have_their_parents_set_to_one_of_their_descendants() {
+        let leaf = Node::new(10);
+        let branch = Node::new(20);
+        let stalk = Node::new(30);
+
+        leaf.set_parent(&branch);
+        branch.set_parent(&stalk);
+        stalk.set_parent(&leaf);
+    }
+
+    #[test]
+    #[should_panic(expected = "already borrowed")]
+    fn tree_nodes_cannot_have_multiple_mutable_references() {
+        let leaf = Node::new(10);
+        let branch = Node::new(20);
+
+        leaf.set_parent(&branch);
+
+        let mut ref1 = leaf.get_mut_properties();
+        let binding = branch.get_mut_properties();
+        let mut ref2 = binding.children[0].get_mut_properties();
+    }
 }
 
 //Get one-upped, Rustbook.
